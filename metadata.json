@@ -1,0 +1,6 @@
+{
+  "name": "Singapore Property Investor Advisor",
+  "description": "AI-powered Singapore property investment, acquisition, disposal, and rental decision engine with URA transaction intelligence, yield calculations, and scenario modeling.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
