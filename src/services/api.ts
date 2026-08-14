@@ -28,6 +28,15 @@ export interface UraStatusResponse {
   };
 }
 
+export interface UraTransactionsResponse {
+  source: string;
+  timestamp: string;
+  batch: string | number;
+  district?: string | number;
+  data?: any;
+  message?: string;
+}
+
 export async function getUraStatus(): Promise<UraStatusResponse> {
   const res = await fetch('/api/ura/status');
   if (!res.ok) {
@@ -35,6 +44,18 @@ export async function getUraStatus(): Promise<UraStatusResponse> {
   }
   return res.json();
 }
+
+export async function fetchUraTransactions(batch: number = 1, district?: number): Promise<UraTransactionsResponse> {
+  const params = new URLSearchParams();
+  params.append('batch', String(batch));
+  if (district) params.append('district', String(district));
+  const res = await fetch(`/api/ura/transactions?${params.toString()}`);
+  if (!res.ok) {
+    throw new Error('Failed to fetch URA transaction batch');
+  }
+  return res.json();
+}
+
 
 export async function askAdvisor(params: AdvisorChatParams): Promise<{ reply: string; timestamp: string }> {
   const res = await fetch('/api/advisor/chat', {
